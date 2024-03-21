@@ -1,7 +1,10 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/src/core/constants/assets_const.dart';
 import 'package:task/src/core/extension/extension.dart';
+import 'package:task/src/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:task/src/feature/auth/presentation/widget/auth_button.dart';
 import 'package:task/src/feature/auth/presentation/widget/text_field.dart';
 
 @RoutePage()
@@ -14,11 +17,21 @@ class AuthView extends StatefulWidget {
 
 class _AuthViewState extends State<AuthView> {
   late final TextEditingController emailController, passwordController;
+  late final AuthBloc _authBloc;
   @override
   void initState() {
+    _authBloc = BlocProvider.of<AuthBloc>(context);
     emailController = TextEditingController();
     passwordController = TextEditingController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _authBloc.close();
+    emailController.clear();
+    passwordController.clear();
+    super.dispose();
   }
 
   @override
@@ -67,26 +80,40 @@ class _AuthViewState extends State<AuthView> {
                         controller: passwordController,
                       ),
                       const Spacer(),
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          width: context.mediaQueryWidth,
-                          margin: const EdgeInsets.symmetric(horizontal: 50),
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(36),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Login',
-                              style: context.textTheme.displaySmall!.copyWith(
-                                color: Colors.white,
-                                fontSize: 22,
+                      BlocConsumer<AuthBloc, AuthState>(
+                        listener: (context, state) {
+                          if (state is AuthSuccess) {
+                            context.router.replaceNamed('/main');
+                          } else if (state is AuthLoading) {
+                            showDialog<Dialog>(
+                              context: context,
+                              builder: (context) => const Center(
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
                               ),
+                            );
+                          } else {
+                            context.router.maybePop();
+                          }
+                        },
+                        builder: (context, state) {
+                          if (state is AuthFailed) {
+                            return Text(state.toString());
+                          } else {
+                            return const SizedBox();
+                          }
+                        },
+                      ),
+                      AuthButton(
+                        onTap: () {
+                          _authBloc.add(
+                            AuthInput(
+                              email: emailController.text,
+                              password: passwordController.text,
                             ),
-                          ),
-                        ),
+                          );
+                        },
                       ),
                       const SizedBox(height: 50),
                     ],
