@@ -1,6 +1,7 @@
 class ProductEntity {
   final int? id;
   final String? title, description, category, image;
+  final double? price;
 
   ProductEntity({
     this.id,
@@ -8,5 +9,6 @@ class ProductEntity {
     this.description,
     this.category,
     this.image,
+    this.price,
   });
 }

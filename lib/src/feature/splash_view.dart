@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:task/src/core/storage/token_storage.dart';
+import 'package:task/src/core/storage/secure_storage.dart';
 
 @RoutePage()
 class SplashView extends StatefulWidget {
@@ -11,12 +11,6 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  @override
-  void initState() {
-    navigate();
-    super.initState();
-  }
-
   void navigate() async {
     String? token = await SecureStorage.readAccessToken();
     if (!mounted) {
@@ -31,8 +25,11 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(),
+    navigate();
+    return const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

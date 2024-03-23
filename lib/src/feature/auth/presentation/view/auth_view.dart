@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/src/core/constants/assets_const.dart';
 import 'package:task/src/core/extension/extension.dart';
+import 'package:task/src/core/storage/secure_storage.dart';
 import 'package:task/src/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:task/src/feature/auth/presentation/widget/auth_button.dart';
 import 'package:task/src/feature/auth/presentation/widget/text_field.dart';
@@ -37,6 +38,7 @@ class _AuthViewState extends State<AuthView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
           color: Colors.black,
@@ -81,8 +83,15 @@ class _AuthViewState extends State<AuthView> {
                       ),
                       const Spacer(),
                       BlocConsumer<AuthBloc, AuthState>(
-                        listener: (context, state) {
+                        listener: (context, state) async {
                           if (state is AuthSuccess) {
+                            await SecureStorage.saveUserInformation(
+                              emailController.text,
+                              passwordController.text,
+                            );
+                            if (!mounted) {
+                              return;
+                            }
                             context.router.replaceNamed('/main');
                           } else if (state is AuthLoading) {
                             showDialog<Dialog>(

@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import '../../feature/auth/presentation/view/auth_view.dart';
+import '../../feature/home/domain/entity/product_entity.dart';
+import '../../feature/home/presentation/view/detail_view.dart';
 import '../../feature/home/presentation/view/home_view.dart';
-import '../../feature/main_view.dart';
-import '../../feature/profile/presentation/view/profile_view.dart';
+import '../../feature/home/main_view.dart';
+import '../../feature/home/presentation/view/profile_view.dart';
 import '../../feature/splash_view.dart';
 
 part 'app_router.gr.dart';
@@ -33,6 +36,10 @@ class AppRouter extends _$AppRouter {
               path: 'profile',
             ),
           ],
+        ),
+        AutoRoute(
+          page: DetailRoute.page,
+          path: '/detail',
         ),
       ];
 }

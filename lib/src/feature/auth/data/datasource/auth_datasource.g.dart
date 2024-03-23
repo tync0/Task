@@ -27,7 +27,6 @@ class _AuthDataSource implements AuthDataSource {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    print("data: $_data");
     final _result =
         await _dio.fetch<void>(_setStreamType<HttpResponse<void>>(Options(
       method: 'POST',

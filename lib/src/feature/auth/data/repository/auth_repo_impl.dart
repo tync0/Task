@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:task/src/core/resource/datastate.dart';
-import 'package:task/src/core/storage/token_storage.dart';
+import 'package:task/src/core/storage/secure_storage.dart';
 import 'package:task/src/feature/auth/data/datasource/auth_datasource.dart';
 import 'package:task/src/feature/auth/domain/repository/auth_repo.dart';
 
