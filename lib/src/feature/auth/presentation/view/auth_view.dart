@@ -7,6 +7,7 @@ import 'package:task/src/core/storage/secure_storage.dart';
 import 'package:task/src/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:task/src/feature/auth/presentation/widget/auth_button.dart';
 import 'package:task/src/feature/auth/presentation/widget/text_field.dart';
+import 'package:task/src/feature/home/presentation/widget/language_dropdown.dart';
 
 @RoutePage()
 class AuthView extends StatefulWidget {
@@ -29,7 +30,6 @@ class _AuthViewState extends State<AuthView> {
 
   @override
   void dispose() {
-    _authBloc.close();
     emailController.clear();
     passwordController.clear();
     super.dispose();
@@ -68,12 +68,12 @@ class _AuthViewState extends State<AuthView> {
                   ),
                   child: Column(
                     children: [
-                      const SizedBox(
-                        height: 80,
-                      ),
+                      const SizedBox(height: 80),
+                      const LocaleDropDown(),
+                      const SizedBox(height: 40),
                       AuthTextField(
                         svg: Assets.emailIcon,
-                        hintText: 'Email',
+                        hintText: context.l10n.username,
                         controller: emailController,
                       ),
                       AuthTextField(
@@ -81,7 +81,7 @@ class _AuthViewState extends State<AuthView> {
                         hintText: 'Password',
                         controller: passwordController,
                       ),
-                      const Spacer(),
+                      const SizedBox(height: 100),
                       BlocConsumer<AuthBloc, AuthState>(
                         listener: (context, state) async {
                           if (state is AuthSuccess) {
@@ -114,6 +114,7 @@ class _AuthViewState extends State<AuthView> {
                           }
                         },
                       ),
+                      const Spacer(),
                       AuthButton(
                         onTap: () {
                           _authBloc.add(

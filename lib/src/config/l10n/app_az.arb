@@ -1,0 +1,11 @@
+{
+    "@@locale": "az",
+    "username": "İstifadəçi adı",
+    "password": "Parol",
+    "save": "Yadda saxla",
+    "deleteAcc": "Hesabı silin",
+    "category": "Kateqoriya",
+    "language": "Dil",
+    "selectCategory": "Kateqoriya seçin",
+    "selectLanguage": "Dil seçin"
+}

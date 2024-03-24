@@ -1,0 +1,11 @@
+{
+    "@@locale": "tr",
+    "username": "Kullanıcı adı",
+    "password": "Şifre",
+    "save": "Kaydet",
+    "deleteAcc": "Hesabı sil",
+    "category": "Kategori",
+    "language": "Dil",
+    "selectCategory": "Kategori seç",
+    "selectLanguage": "Dil seçin"
+}

@@ -35,11 +35,11 @@ class _HomeViewState extends State<HomeView> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Category",
+                  context.l10n.category,
                   style: context.textTheme.headlineSmall,
                 ),
                 DropdownButton<String>(
-                  hint: const Text('Select Category'),
+                  hint: Text(context.l10n.selectCategory),
                   value: _selectedCategory,
                   items: [
                     'all',

@@ -11,6 +11,15 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  @override
+  void initState() {
+    Future.delayed(
+      const Duration(seconds: 2),
+      () => navigate(),
+    );
+    super.initState();
+  }
+
   void navigate() async {
     String? token = await SecureStorage.readAccessToken();
     if (!mounted) {
@@ -25,7 +34,6 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    navigate();
     return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(),

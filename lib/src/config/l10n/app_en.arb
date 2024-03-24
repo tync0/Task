@@ -1,0 +1,11 @@
+{
+    "@@locale": "en",
+    "username": "Username",
+    "password": "Password",
+    "save": "Save",
+    "deleteAcc": "Delete Account",
+    "category": "Category",
+    "language": "Language",
+    "selectCategory": "Select Category",
+    "selectLanguage": "Select Language"
+}

@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:task/src/core/extension/extension.dart';
 import 'package:task/src/core/storage/secure_storage.dart';
 import 'package:task/src/feature/auth/presentation/widget/auth_button.dart';
+import 'package:task/src/feature/home/presentation/widget/language_dropdown.dart';
 
 import '../../../../core/constants/assets_const.dart';
 import '../../../auth/presentation/widget/text_field.dart';
@@ -40,6 +42,7 @@ class _ProfileViewState extends State<ProfileView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -67,9 +70,10 @@ class _ProfileViewState extends State<ProfileView> {
                   hintText: 'Password',
                   controller: passwordController,
                 ),
+                const LocaleDropDown(),
                 const SizedBox(height: 50),
                 AuthButton(
-                  title: "Save",
+                  title: l10n.save,
                   onTap: () async {
                     await SecureStorage.saveUserInformation(
                       usernameController.text,
@@ -80,7 +84,7 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
                 const SizedBox(height: 20),
                 AuthButton(
-                  title: "Delete account",
+                  title: l10n.deleteAcc,
                   color: Colors.red,
                   onTap: () async {
                     await SecureStorage.deleteAccount();
