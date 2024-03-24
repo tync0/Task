@@ -11,6 +11,8 @@ abstract class MainDataSource {
     dio.interceptors.add(AuthInterceptor());
     return _MainDataSource(dio);
   }
-  @GET(ServiceConst.productEndPoint)
-  Future<HttpResponse> getProducts();
+  @GET('${ServiceConst.productEndPoint}?limit={limit}&offset=5')
+  Future<HttpResponse> getProducts(
+    @Path('limit') int? limit,
+  );
 }

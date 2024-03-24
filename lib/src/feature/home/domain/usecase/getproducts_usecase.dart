@@ -8,7 +8,7 @@ class GetProductsUsecaseImpl
   final MainRepository _mainRepository;
   const GetProductsUsecaseImpl(this._mainRepository);
   @override
-  Future<DataState<List<ProductEntity>>> call() {
-    return _mainRepository.getProducts();
+  Future<DataState<List<ProductEntity>>> call({int? limit}) {
+    return _mainRepository.getProducts(limit: limit);
   }
 }

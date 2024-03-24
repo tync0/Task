@@ -9,9 +9,9 @@ class MainRepositoryImpl implements MainRepository {
   final MainDataSource _dataSource;
   const MainRepositoryImpl(this._dataSource);
   @override
-  Future<DataState<List<ProductEntity>>> getProducts() async {
+  Future<DataState<List<ProductEntity>>> getProducts({int? limit}) async {
     try {
-      final httpResponse = await _dataSource.getProducts();
+      final httpResponse = await _dataSource.getProducts(limit);
       if (httpResponse.response.statusCode == 200) {
         List<ProductModel> products = List<ProductModel>.from(
           httpResponse.response.data.map(

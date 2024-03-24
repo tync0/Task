@@ -20,6 +20,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     BlocProvider.of<ProductBloc>(context).add(GetProductsEvent());
+
     super.initState();
   }
 
@@ -80,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
                               )
                               .toList();
                           return SizedBox(
-                            height: products.length * 170,
+                            height: products.length * 165,
                             child: ListView.separated(
                               physics: const NeverScrollableScrollPhysics(),
                               separatorBuilder: (context, index) =>

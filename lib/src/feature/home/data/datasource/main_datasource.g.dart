@@ -21,9 +21,10 @@ class _MainDataSource implements MainDataSource {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<dynamic>> getProducts() async {
+  Future<HttpResponse<dynamic>> getProducts(int? limit) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result =
@@ -34,7 +35,7 @@ class _MainDataSource implements MainDataSource {
     )
             .compose(
               _dio.options,
-              '/products',
+              '/products?limit=${limit}&offset=5',
               queryParameters: queryParameters,
               data: _data,
             )

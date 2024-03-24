@@ -1,5 +1,5 @@
 abstract class GetProductsUsecase<T> {
-  Future<T> call();
+  Future<T> call({int? limit});
 }
 
 abstract class AuthUsecase<T> {
